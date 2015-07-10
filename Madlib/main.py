@@ -25,18 +25,22 @@ def validate():
     elif answers[0] == "green":
         madlib['mood'] = "envious"
     elif answers[0] == "yellow":
-        madlib['mood'] == "elated"
+        madlib['mood'] = "elated"
     else:
-        madlib['mood'] == "confused"
+        madlib['mood'] = "confused"
     if answers[2] == "yes" or "y":
-        madlib['kids'] == raw_input("How many kids do you have? ")
+        madlib['kids'] = raw_input("How many kids do you have? ")
     elif answers[2] == "no" or "n":
-        madlib['kids'] == "no"
+        madlib['kids'] = "no"
     else:
-        answers[2] == raw_input("Seriously, do you have any kids? ")
+        answers[2] = raw_input("Seriously, do you have any kids? ")
         validate()
 
 for question in questions:
     answer = raw_input(question).lower()
     answers.append(answer)
-    validate()
+
+validate()
+
+print madlib
+print answers
