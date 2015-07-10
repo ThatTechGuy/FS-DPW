@@ -28,9 +28,9 @@ def validate():
         madlib['mood'] = "elated"
     else:
         madlib['mood'] = "confused"
-    if answers[2] == "yes" or "y":
+    if answers[2] == ("yes" or "y"):
         madlib['kids'] = raw_input("How many kids do you have? ")
-    elif answers[2] == "no" or "n":
+    elif answers[2] == ("no" or "n"):
         madlib['kids'] = "no"
     else:
         answers[2] = raw_input("Seriously, do you have any kids? ")
