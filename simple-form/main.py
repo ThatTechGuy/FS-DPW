@@ -47,8 +47,6 @@ class Page(object):
                 <input type="email" name="email" />
                 </br>
                 <label>Your Gender: </label>
-                <!--This guy here is because Python or GAEL apparently does not simply like to declare undefined GETs as False -->
-                <input type="hidden" name="gender" value="" />
                 <input type="radio" name="gender" value="Mr." /> Male
                 <input type="radio" name="gender" value="Ms." /> Female
                 </br>
@@ -112,7 +110,7 @@ class Page(object):
     #Declare validate function and check to see if we have all the inputs, 4 or 5 is cool
     #UPDATE As of hidden input fix validate now requires strictly 5 or greater for success
     def validate(self):
-        if len(self.form) > 5:
+        if len(self.form) >= 5:
             if not self.form['game']:
                 #This means we got all our inputs but the Game Selector was left at default
                 result = "If your favorite game series is not listed, pick the one you can most tolerate."
@@ -122,7 +120,7 @@ class Page(object):
                     self.form['promo'] = "did not enroll"
                 result = False
         else:
-            #We had less then 6 inputs, so go ahead and sling em back to the survey page
+            #We had less then 5 inputs, so go ahead and sling em back to the survey page
             result = "All fields are required, please complete the survey in its entirety and resubmit."
         return result
 
