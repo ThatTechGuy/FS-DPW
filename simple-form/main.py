@@ -17,7 +17,7 @@ class Page(object):
         self.header = '''
         '''
         self.error = '''
-        {error}
+{error}
         '''
         self.survey = '''
 <form method="GET">
@@ -28,12 +28,12 @@ class Page(object):
     <input type="email" name="email" />
     </br>
     <label>Your Gender: </label>
-    <input type="radio" name="gender" value="Sir" /> Male
-    <input type="radio" name="gender" value="Mam" /> Female
+    <input type="radio" name="gender" value="Mr." /> Male
+    <input type="radio" name="gender" value="Ms." /> Female
     </br>
     <label>Favorite Game Series: </label>
     <select name="game">
-        <option value="0">Choose One...</option>
+        <option value="">Choose One...</option>
         <option value="Call of Duty">Call of Duty</option>
         <option value="Assassins Creed">Assassins Creed</option>
         <option value="Sly Cooper">Sly Cooper</option>
@@ -41,12 +41,20 @@ class Page(object):
     </select>
     </br>
     <label>Receive Promotions? </label></br>
-    <input type="checkbox" name="promo" value="1"> Yes, I would like to receive promotional emails.
+    <input type="checkbox" name="promo" value="enrolled"> Yes, I would like to receive promotional emails.
     </br>
     <input type="submit" value="Submit" />
 </form>
         '''
         self.success = '''
+<h4>Thank You {gender} {name}! We received your submission...</h4>
+<p>As you requested, we <strong>{promo}</strong> you in our promotional newsletter in which we send out periodic updates on new surveys and more. However, for this survey we have recorded the following information from which you provided:
+<p>
+Your Email: <strong>{email}</strong></br>
+Favorite Game Series: <strong>{game}</strong>
+</p>
+<p>Again, Thank You!</br>
+<em>-GameSurveys</em></p>
         '''
         self.footer = '''
         '''
@@ -64,14 +72,12 @@ class Page(object):
 
     def validate(self):
         if len(self.form) >= 4:
-            if int(self.form['game']) == 0:
+            if not self.form['game']:
                 result = "If your favorite game series is not listed, pick the one you can most tolerate."
             else:
-                if int(self.form['promo']) != 1:
-                    self.form['promo'] = "0"
-                    result = False
-                else:
-                    result = False
+                if not self.form['promo']:
+                    self.form['promo'] = "did not enroll"
+                result = False
         else:
             result = "All fields are required, please complete the survey in its entirety and resubmit."
         return result
