@@ -8,8 +8,8 @@ import webapp2
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        form = Page()
-        self.response.write(form.load(self.request.GET))
+        form = Page(self.request.GET)
+        self.response.write(form.load())
 
 class Page(object):
     def __init__(self, form=False):
@@ -17,6 +17,7 @@ class Page(object):
         self.header = '''
         '''
         self.error = '''
+        {error}
         '''
         self.survey = '''
 <form method="GET">
@@ -41,6 +42,8 @@ class Page(object):
     </br>
     <label>Receive Promotions? </label></br>
     <input type="checkbox" name="promo" value="1"> Yes, I would like to receive promotional emails.
+    </br>
+    <input type="submit" value="Submit" />
 </form>
         '''
         self.success = '''
@@ -50,17 +53,17 @@ class Page(object):
 
     def load(self):
         if self.form:
-            self.form['error'] = validate()
+            self.form['error'] = self.validate()
             if self.form['error']:
                 output = self.header + self.error + self.survey + self.footer
             else:
-                self.header + self.success + self.footer
+                output = self.header + self.success + self.footer
         else:
-            self.header + self.survey + self.footer
+            output = self.header + self.survey + self.footer
         return output.format(**self.form)
 
     def validate(self):
-        if self.form.len() >= 4:
+        if len(self.form) >= 4:
             if int(self.form['game']) == 0:
                 result = "If your favorite game series is not listed, pick the one you can most tolerate."
             else:
