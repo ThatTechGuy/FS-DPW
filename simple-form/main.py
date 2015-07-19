@@ -8,11 +8,15 @@ import webapp2
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        #Initializing an instance of Page class which will pass GET object
         form = Page(self.request.GET)
+        #Calling load function to write to browser with instance initialized
         self.response.write(form.load())
 
+#Declare Page and init with a sexy little optional param to avoid GET var errors on fresh load
 class Page(object):
     def __init__(self, form=False):
+        #All my html divied up into separate attributes and assign GET object
         self.form = form
         self.header = '''
 <!DOCTYPE html>
@@ -56,6 +60,7 @@ class Page(object):
                 </select>
                 </br>
                 <label>Receive Promotions? </label></br>
+                <!--This guy here is because Python or GAEL apparently does not simply like to declare undefined GETs as False -->
                 <input type="hidden" name="promo" value="" />
                 <input type="checkbox" name="promo" value="enrolled"> Yes, I would like to receive promotional emails.
                 </br>
@@ -86,26 +91,35 @@ class Page(object):
 </html>
         '''
 
+    #Declare load function and run validate, assign error result then check
     def load(self):
         if self.form:
             self.form['error'] = self.validate()
             if self.form['error']:
+                #We are here because we do have GET vars but also an error from validate
                 output = self.header + self.error + self.survey + self.footer
             else:
+                #Ended up here cuz we awesome sauce with no errors and GET vars
                 output = self.header + self.success + self.footer
         else:
+            #Made it this way cuz no GET or error, prob fresh page load
             output = self.header + self.survey + self.footer
+        #This gimmick here returns our compilation and runs the string formatter through our GET vars (very handy)
         return output.format(**self.form)
 
+    #Declare validate function and check to see if we have all the inputs, 4 or 5 is cool
     def validate(self):
         if len(self.form) >= 4:
             if not self.form['game']:
+                #This means we got all our inputs but the Game Selector was left at default
                 result = "If your favorite game series is not listed, pick the one you can most tolerate."
             else:
                 if not self.form['promo']:
+                    #Could of had the hidden input take care of this but I wanted to use validate
                     self.form['promo'] = "did not enroll"
                 result = False
         else:
+            #We had less then 4 inputs, so go ahead and sling em back to the survey page
             result = "All fields are required, please complete the survey in its entirety and resubmit."
         return result
 
