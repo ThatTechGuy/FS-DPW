@@ -1,0 +1,62 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body{
+  margin: 0 auto 100px;
+  width: 60%;
+  min-height: 100%;
+  color: #3B3738;
+  clear: both;
+  background: -webkit-linear-gradient(#C63D0F, #FDF3E7) no-repeat;
+  background: -o-linear-gradient(#C63D0F, #FDF3E7) no-repeat;
+  background: -moz-linear-gradient(#C63D0F, #FDF3E7) no-repeat;
+  background: linear-gradient(#C63D0F, #FDF3E7) no-repeat;
+}
+
+div#success, div#survey{
+  width: 70%;
+  float: left;
+  border-bottom: 0 none;
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+  margin-top: 5%;
+}
+
+div.image > img{
+  width: 25%;
+  padding-left: 5%;
+  height: auto;
+  -ms-transform: rotate(20deg);
+  -webkit-transform: rotate(20deg);
+  transform: rotate(20deg);
+}
+
+input, select, label, div#success > h4, div#success > p {
+  margin-left: 5%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+input[type=submit] {
+	background-color:#7E8F7C;
+	color:#fff;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:18px;
+	line-height:30px;
+	border-radius:20px;
+	-webkit-border-radius:20px;
+	-moz-border-radius:20px;
+	border:0;
+	text-shadow:#C17C3A 0 -1px 0;
+	width:120px;
+	height:32px
+}
+
+footer {
+    position: absolute;
+    left: 20%;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+}
