@@ -122,7 +122,7 @@ class Page(object):
                     self.form['promo'] = "did not enroll"
                 result = False
         else:
-            #We had less then 4 inputs, so go ahead and sling em back to the survey page
+            #We had less then 6 inputs, so go ahead and sling em back to the survey page
             result = "All fields are required, please complete the survey in its entirety and resubmit."
         return result
 
