@@ -47,6 +47,8 @@ class Page(object):
                 <input type="email" name="email" />
                 </br>
                 <label>Your Gender: </label>
+                <!--This guy here is because Python or GAEL apparently does not simply like to declare undefined GETs as False -->
+                <input type="hidden" name="gender" value="" />
                 <input type="radio" name="gender" value="Mr." /> Male
                 <input type="radio" name="gender" value="Ms." /> Female
                 </br>
