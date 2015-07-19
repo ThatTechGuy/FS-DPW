@@ -110,9 +110,9 @@ class Page(object):
         return output.format(**self.form)
 
     #Declare validate function and check to see if we have all the inputs, 4 or 5 is cool
-    #UPDATE As of hidden input fix validate now requires strictly 5 inputs for success
+    #UPDATE As of hidden input fix validate now requires strictly 5 or greater for success
     def validate(self):
-        if len(self.form) == 5:
+        if len(self.form) > 5:
             if not self.form['game']:
                 #This means we got all our inputs but the Game Selector was left at default
                 result = "If your favorite game series is not listed, pick the one you can most tolerate."
