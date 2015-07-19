@@ -30,7 +30,7 @@ class Page(object):
     <input type="radio" name="gender" value="Sir" /> Male
     <input type="radio" name="gender" value="Mam" /> Female
     </br>
-    <label>Your Favorite Game: </label>
+    <label>Favorite Game Series: </label>
     <select name="game">
         <option value="0">Choose One...</option>
         <option value="Call of Duty">Call of Duty</option>
@@ -50,17 +50,28 @@ class Page(object):
 
     def load(self):
         if self.form:
-            error = validate()
+            self.form['error'] = validate()
+            if self.form['error']:
+                output = self.header + self.error + self.survey + self.footer
+            else:
+                self.header + self.success + self.footer
         else:
-            pass
+            self.header + self.survey + self.footer
         return output.format(**self.form)
 
     def validate(self):
         if self.form.len() >= 4:
-            pass
+            if int(self.form['game']) == 0:
+                result = "If your favorite game series is not listed, pick the one you can most tolerate."
+            else:
+                if int(self.form['promo']) != 1:
+                    self.form['promo'] = "0"
+                    result = False
+                else:
+                    result = False
         else:
-            return "All fields are required, please complete the survey in its entirety and resubmit."
-
+            result = "All fields are required, please complete the survey in its entirety and resubmit."
+        return result
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
