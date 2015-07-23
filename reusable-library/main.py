@@ -5,10 +5,12 @@ Assignment: Reusable Library
 '''
 
 import webapp2
+from pages import *
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write('Hello world!')
+        home_page = DefaultPage()
+        self.response.write(home_page.load())
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
