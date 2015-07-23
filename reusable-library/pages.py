@@ -108,3 +108,10 @@ class DefaultPage(object):
 
     def load(self):
         return self.header + self.section + self.footer
+
+class RecordPage(DefaultPage):
+    def __init__(self,form):
+        DefaultPage.__init__(self)
+        self.section = '''
+<p>Just running a test</p>
+'''
