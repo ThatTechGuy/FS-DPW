@@ -40,7 +40,7 @@ class DefaultPage(object):
             <div class="form-group">
               <label for="name" class="col-sm-2 control-label">Business Name</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="name" name="name" placeholder="John Doe's Lawn Care" />
+                <input type="text" class="form-control" id="name" name="name" placeholder="John Doe's Lawn Care" required />
               </div>
             </div>
             <div class="form-group">
@@ -56,13 +56,13 @@ class DefaultPage(object):
             <div class="form-group">
               <label for="contact" class="col-sm-2 control-label">Contact Name</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="contact" name="contact" placeholder="John Doe" />
+                <input type="text" class="form-control" id="contact" name="contact" placeholder="John Doe" required />
               </div>
             </div>
             <div class="form-group">
               <label for="number" class="col-sm-2 control-label">Contact Number</label>
               <div class="col-sm-10">
-                <input type="tel" class="form-control" id="number" name="number" placeholder="1234567890" />
+                <input type="tel" class="form-control" id="number" name="number" placeholder="1234567890" required />
               </div>
             </div>
             <div class="form-group">
@@ -120,13 +120,14 @@ class RecordPage(DefaultPage):
         </div>
         <div class="jumbotron clearfix">
           <div class="col-sm-6">
-           <h3>{name} <small>Registrant: {contact}</small></h3>
-           <h4>Cashing Eligibility: <span class="label {color}">{eligible}</span></h4>
+           <h3>{name} </br><small>Registrant: {contact}</small></h3>
+
            </br>
            <h4><strong>Contact:</strong> {contact}</h4>
            <h4><strong>Number:</strong> {number}</h4>
           </div>
          <div class="col-sm-6">
+           <h4 class="text-right">Cashing Eligibility: <span class="label {color}">{eligible}</span></h4>
            <ul class="list-group">
              {files}
            </ul>

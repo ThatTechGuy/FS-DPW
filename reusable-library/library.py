@@ -14,7 +14,8 @@ class Record(object):
 
     def check_eligibility(self):
         if all (k in self.__record for k in ("sun","art","wcs","irs","loa")):
-            self.__record['eligible'] = ["text-success","All Checks"]
+            self.__record['eligible'] = "All Checks"
+            self.__record['color'] = self.bootstrap_color("green")
         elif all (k in self.__record for k in ("sun","wcs","loa")):
             if self.__record['type'] == "DBA":
                 self.__record['eligible'] = "All Checks"
