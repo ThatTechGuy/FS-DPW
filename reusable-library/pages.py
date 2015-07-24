@@ -69,19 +69,19 @@ class DefaultPage(object):
               <label for="files" class="col-sm-2 control-label">Files Available</label>
               <div class="col-sm-10">
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="sunbiz" name="files[sun]" value="1"> Sunbiz Registration
+                  <input type="checkbox" id="sunbiz" name="sun" value="1"> Sunbiz Registration
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="articles" name="files[art]" value="1"> Articles of Incorporation
+                  <input type="checkbox" id="articles" name="art" value="1"> Articles of Incorporation
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="workcomp" name="files[wcs]" value="1"> Workman's Comp Search
+                  <input type="checkbox" id="workcomp" name="wcs" value="1"> Workman's Comp Search
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="irsletter" name="files[irs]" value="1"> IRS Letter w/ Tax ID
+                  <input type="checkbox" id="irsletter" name="irs" value="1"> IRS Letter w/ Tax ID
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="custloa" name="files['loa']" value="1"> Letter of Authority
+                  <input type="checkbox" id="custloa" name="loa" value="1"> Letter of Authority
                 </label>
               </div>
             </div>
@@ -112,6 +112,8 @@ class DefaultPage(object):
 class RecordPage(DefaultPage):
     def __init__(self,form):
         DefaultPage.__init__(self)
-        self.section = '''
-<p>Just running a test</p>
+        output_build = '''
+<p>{contact}</p>
+<p class="{color}">{eligible}</p>
 '''
+        self.section = output_build.format(**form)

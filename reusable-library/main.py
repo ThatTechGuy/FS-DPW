@@ -11,7 +11,9 @@ from library import *
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         if self.request.GET:
-            display = RecordPage(self.request.GET)
+            this = Record()
+            this.record = self.request.GET
+            display = RecordPage(this.record)
         else:
             display = DefaultPage()
         self.response.write(display.load())
