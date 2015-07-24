@@ -1,5 +1,6 @@
 class DefaultPage(object):
     def __init__(self):
+        #Section out html for both pages in the default page class
         self.header = '''
 <!DOCTYPE html>
 <html lang="en">
@@ -106,9 +107,11 @@ class DefaultPage(object):
 </html>
 '''
 
+    #Combine HTML and place in load function for controller
     def load(self):
         return self.header + self.section + self.footer
 
+#Inherit from default page and override section for success to replace form
 class RecordPage(DefaultPage):
     def __init__(self,form):
         DefaultPage.__init__(self)
@@ -136,4 +139,5 @@ class RecordPage(DefaultPage):
       </div>
     </section>
 '''
+        #We also need to format our string with our variables from GET
         self.section = output_build.format(**form)

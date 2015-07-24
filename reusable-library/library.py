@@ -2,6 +2,7 @@ class Record(object):
     def __init__(self):
         self.__record = {}
 
+    #Getter and Setter for form values, also run additional utility functions within
     @property
     def record(self):
         return self.__record
@@ -12,6 +13,7 @@ class Record(object):
         self.check_eligibility()
         self.list_item()
 
+    #Utility function for determining eligibility for DBA check cashing based on files available
     def check_eligibility(self):
         if all (k in self.__record for k in ("sun","art","wcs","irs","loa")):
             self.__record['eligible'] = "All Checks"
@@ -30,6 +32,7 @@ class Record(object):
             self.__record['eligible'] = "Personal Only"
             self.__record['color'] = self.bootstrap_color("red")
 
+    #Utility function for building list-group items for each file, hate to do it this way but...
     def list_item(self):
         self.__record['files'] = ""
         if 'sun' in self.__record:
@@ -53,6 +56,7 @@ class Record(object):
             <li class="list-group-item">Letter of Authority</li>
             '''
 
+    #One more utility function for simplifying color changes, could use this for a lot of things
     def bootstrap_color(self,color):
         if color == "green":
             return "label-success"
