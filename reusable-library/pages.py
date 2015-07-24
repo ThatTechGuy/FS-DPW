@@ -118,8 +118,23 @@ class RecordPage(DefaultPage):
         <div class="page-header clearfix">
           <h1 class="pull-left">Open Business Record</h1>
         </div>
-        <div class="jumbotron">
-         <h3>{name} <small>Registrant: {contact}</small></h3>
+        <div class="jumbotron clearfix">
+          <div class="col-sm-6">
+           <h3>{name} <small>Registrant: {contact}</small></h3>
+           <h4>Cashing Eligibility: <span class="label {color}">{eligible}</span></h4>
+           </br>
+           <h4><strong>Contact:</strong> {contact}</h4>
+           <h4><strong>Number:</strong> {number}</h4>
+          </div>
+         <div class="col-sm-6">
+           <ul class="list-group">
+             <li class="list-group-item">Cras justo odio</li>
+             <li class="list-group-item">Dapibus ac facilisis in</li>
+             <li class="list-group-item">Morbi leo risus</li>
+             <li class="list-group-item">Porta ac consectetur ac</li>
+             <li class="list-group-item">Vestibulum at eros</li>
+           </ul>
+         </div>
         </div>
       </div>
     </section>
