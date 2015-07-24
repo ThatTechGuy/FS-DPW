@@ -113,7 +113,15 @@ class RecordPage(DefaultPage):
     def __init__(self,form):
         DefaultPage.__init__(self)
         output_build = '''
-<p>{contact}</p>
-<p class="{color}">{eligible}</p>
+    <section>
+      <div class="container">
+        <div class="page-header clearfix">
+          <h1 class="pull-left">Open Business Record</h1>
+        </div>
+        <div class="jumbotron">
+         <h3>{name} <small>Registrant: {contact}</small></h3>
+        </div>
+      </div>
+    </section>
 '''
         self.section = output_build.format(**form)
