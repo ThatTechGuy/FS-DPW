@@ -60,8 +60,9 @@ class DefaultPage(object):
 
 #Inherit from default page and add new HTML keys to dictionary
 class LandingPage(DefaultPage):
-    def __init__(self):
+    def __init__(self, pages):
         DefaultPage.__init__(self)
+        self.pages = pages
         self.html['section'] = '''
 
 '''
