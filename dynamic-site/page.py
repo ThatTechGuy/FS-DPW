@@ -1,6 +1,7 @@
 class DefaultPage(object):
     def __init__(self):
         self.html = {}
+        self.build = {}
         #Create HTML dictionary and section out keys with all base HTML
         self.html['header'] = '''
 <!DOCTYPE html>
@@ -47,20 +48,32 @@ class DefaultPage(object):
 '''
 
     #Combine all HTML in dictionary regardless of how many and format with passed dictionary
-    def load(self, build):
+    def load(self):
         output = ''
         self.build_hook()
         for html in self.html:
-            build += html
-        return output.format(**build)
+            output += html
+        return output.format(**self.build)
 
     def build_hook(self):
         print "build_hook is not available in this module"
 
 #Inherit from default page and add new HTML keys to dictionary
-class RecordPage(DefaultPage):
+class LandingPage(DefaultPage):
     def __init__(self):
         DefaultPage.__init__(self)
+        self.html['section'] = '''
+
+'''
+
+    def build_hook(self):
+        pass
+
+#Inherit from default page and add new HTML keys to dictionary
+class OperationPage(DefaultPage):
+    def __init__(self, build):
+        DefaultPage.__init__(self)
+        self.build = build
         self.html['section'] = '''
     <section>
       <div class="container">
