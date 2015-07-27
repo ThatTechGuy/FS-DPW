@@ -11,16 +11,18 @@ from lib import *
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        #Instantiate library and data and configure compiler with data
+        secure = DataTrojan()
         compiler = DataCompiler()
-        #If we have var, instantiate compiler and pass to DataTrojan GETTER
+        compiler.config(secure.data)
+        #With GETs we will give only the needed data to the compiler
         if self.request.GET['op']:
-            compiler.push = DataTrojan(self.request.GET['op'])
-            #After compiling send to OP page with full dictionary for formatting
-            display = OperationPage(compiler.pull)
+            compiler.collate(secure.auth(self.request.GET['op']))
+            display = OperationPage(compiler.store)
+        #Without GETS we will get only the compilers configuration
         else:
-            #Without GET var load LandingPage with compiler GETTER for pages
-            display = LandingPage(compiler.config)
-        #Load Page by calling base load inherited from Default incorporating hook
+            display = LandingPage(compiler.store)
+        #After everything is compiled, authorized, and collated we print
         self.response.write(display.load())
 
 app = webapp2.WSGIApplication([
