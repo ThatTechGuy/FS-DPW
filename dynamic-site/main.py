@@ -17,7 +17,7 @@ class MainHandler(webapp2.RequestHandler):
         compiler.config(secure.data)
         #With GETs we will give only the needed data to the compiler
         if self.request.GET['op']:
-            compiler.collect(secure.auth(self.request.GET['op']))
+            compiler.collate(secure.auth(self.request.GET['op']))
             display = OperationPage(compiler.store)
         #Without GETS we will get only the compilers configuration
         else:

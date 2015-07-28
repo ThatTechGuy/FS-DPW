@@ -75,7 +75,8 @@ class OperationPage(DefaultPage):
     def __init__(self, build):
         DefaultPage.__init__(self)
         self.build = build
-        self.html['section'] = '''
+        self.html['section'] = ''
+'''
     <section>
       <div class="container">
         <div class="page-header clearfix">
