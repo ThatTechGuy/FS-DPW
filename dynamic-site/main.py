@@ -17,12 +17,12 @@ class MainHandler(webapp2.RequestHandler):
         compiler.config(secure.data)
         #With GETs we will give only the needed data to the compiler
         if self.request.GET['op']:
-            compiler.collate(secure.auth(self.request.GET['op']))
+            compiler.collect(secure.auth(self.request.GET['op']))
             display = OperationPage(compiler.store)
         #Without GETS we will get only the compilers configuration
         else:
             display = LandingPage(compiler.store)
-        #After everything is compiled, authorized, and collated we print
+        #After everything is authorized, collected, and compiled we print
         self.response.write(display.load())
 
 app = webapp2.WSGIApplication([
