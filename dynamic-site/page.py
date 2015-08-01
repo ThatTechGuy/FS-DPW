@@ -133,6 +133,3 @@ class OperationPage(DefaultPage):
       </div>
     </section>
 '''
-
-    def build_hook(self):
-        pass
