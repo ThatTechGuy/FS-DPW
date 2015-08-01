@@ -10,7 +10,7 @@ class DefaultPage(object):
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MasterFile</title>
+    <title>OperationCommand</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -24,10 +24,12 @@ class DefaultPage(object):
     <![endif]-->
   </head>
   <body style="padding-top:50px">
+'''
+        self.html['navbar'] = '''
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="">MasterFile</a>
+          <a class="navbar-brand" href="/">OperationCommand</a>
         </div>
       </div>
     </nav>
@@ -35,7 +37,7 @@ class DefaultPage(object):
         self.html['footer'] = '''
     <footer class="footer">
       <div class="container">
-        <p class="text-muted center-text">&copy; 2015 MasterFile by Rick Martin</p>
+        <p class="text-muted center-text">&copy; 2015 OperationCommand by Rick Martin</p>
       </div>
     </footer>
 
@@ -49,10 +51,8 @@ class DefaultPage(object):
 
     #Combine all HTML in dictionary regardless of how many and format with passed dictionary
     def load(self):
-        output = ''
         self.build_hook()
-        for html in self.html:
-            output += html
+        output = self.html['header'] + self.html['navbar'] + self.html['section'] + self.html['footer']
         return output.format(**self.build)
 
     def build_hook(self):
@@ -63,39 +63,72 @@ class LandingPage(DefaultPage):
     def __init__(self, pages):
         DefaultPage.__init__(self)
         self.pages = pages
+        self.html['navbar'] = '''
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="">OperationCommand</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        {links}
+      </ul>
+    </div>
+  </div>
+</nav>
+'''
         self.html['section'] = '''
-
+    <section>
+      <div class="container">
+        <div class="page-header clearfix">
+          <h1 class="pull-left">Operation Campaign Briefing</h1>
+        </div>
+        <div class="jumbotron clearfix">
+          <div class="row">
+            <div class="col-md-6">
+              <h1><em>Control</em> Team</br>
+              <small>Leader: <strong>Confidential</strong></small></h1>
+              <h2>Base of Operations: <em>Undisclosed</em></h2>
+              <p>This campaign is being lead by the most elite group of indivduals forming the best teams our organization has to offer. In the main navigation you will find links to each mission briefing for your team, let there be no mistake, it's all riding on this.</p>
+            </div>
+            <div class="col-md-6">
+              <img class="img-thumbnail" width="100%" src="/image/control.png" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 '''
 
+    #Loop through pages given and create links in nav only available on homepage
     def build_hook(self):
-        pass
+        self.build['links'] = ""
+        for page in self.pages:
+            self.build['links'] += "<li><a href='/?op=%s'>%s</a></li>" % (page,page)
 
 #Inherit from default page and add new HTML keys to dictionary
 class OperationPage(DefaultPage):
     def __init__(self, build):
         DefaultPage.__init__(self)
         self.build = build
-        self.html['section'] = ''
-'''
+        self.html['section'] = '''
     <section>
       <div class="container">
         <div class="page-header clearfix">
-          <h1 class="pull-left">Open Business Record</h1>
+          <h1 class="pull-left">Operation <em>"{name}"</em> Briefing</h1>
         </div>
         <div class="jumbotron clearfix">
-          <div class="col-sm-6">
-           <h3>{name} </br><small>Registrant: {contact}</small></h3>
-
-           </br>
-           <h4><strong>Contact:</strong> {contact}</h4>
-           <h4><strong>Number:</strong> {number}</h4>
+          <div class="row">
+            <div class="col-md-6">
+              <h1><em>{squad}</em> Squad</br>
+              <small>Leader: <strong>{leader}</strong></small></h1>
+              <h2>Insertion Point: <em>{local}</em></h2>
+              <p>{brief}</p>
+            </div>
+            <div class="col-md-6">
+              <img class="img-thumbnail" width="100%" src="{image}" />
+            </div>
           </div>
-         <div class="col-sm-6">
-           <h4 class="text-right">Cashing Eligibility: <span class="label {color}">{eligible}</span></h4>
-           <ul class="list-group">
-             {files}
-           </ul>
-         </div>
         </div>
       </div>
     </section>
